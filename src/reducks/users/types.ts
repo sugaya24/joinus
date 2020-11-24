@@ -1,8 +1,10 @@
 export type UsersInfo = {
   isSignedIn: boolean;
+  role: string;
   uid: string;
   username: string;
-  email: string;
+  email?: string;
+  confirmPassword?: string;
 };
 
 export const SIGN_IN = 'SIGN_IN';
