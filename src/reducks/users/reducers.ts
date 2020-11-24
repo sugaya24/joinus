@@ -1,6 +1,5 @@
 import * as Actions from './actions';
 import initialState from '../store/initialState';
-console.log(initialState);
 
 export const UsersReducer = (
   state = initialState.users,
