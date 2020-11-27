@@ -2,6 +2,11 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+type PrimaryButtonParameter = {
+  label: string;
+  onClick: any;
+};
+
 const useStyles = makeStyles((theme) => ({
   button: {
     background: '#25C685',
@@ -16,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PrimaryButton = (props: any) => {
+const PrimaryButton = (props: PrimaryButtonParameter) => {
   const classes = useStyles();
 
   return (

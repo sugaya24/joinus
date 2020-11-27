@@ -1,7 +1,18 @@
 import React from 'react';
 import { TextField } from '@material-ui/core';
 
-const TextInput = (props: any) => {
+type TextInputParameter = {
+  fullWidth: boolean;
+  label: string;
+  multiline: boolean;
+  required: boolean;
+  rows: number;
+  value: string;
+  type: string;
+  onChange: any;
+};
+
+const TextInput = (props: TextInputParameter) => {
   return (
     <TextField
       fullWidth={props.fullWidth}
