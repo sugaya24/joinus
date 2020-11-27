@@ -45,7 +45,7 @@ const SignUp = () => {
           label={'Username'}
           multiline={false}
           required={true}
-          row={1}
+          rows={1}
           value={username}
           type={'text'}
           onChange={inputUsername}
@@ -55,7 +55,7 @@ const SignUp = () => {
           label={'Email'}
           multiline={false}
           required={true}
-          row={1}
+          rows={1}
           value={email}
           type={'email'}
           onChange={inputEmail}
@@ -65,7 +65,7 @@ const SignUp = () => {
           label={'Password'}
           multiline={false}
           required={true}
-          row={1}
+          rows={1}
           value={password}
           type={'password'}
           onChange={inputPassword}
@@ -75,7 +75,7 @@ const SignUp = () => {
           label={'ConfirmPassword'}
           multiline={false}
           required={true}
-          row={1}
+          rows={1}
           value={confirmPassword}
           type={'password'}
           onChange={inputConfirmPassword}
