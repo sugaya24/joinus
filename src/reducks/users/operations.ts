@@ -1,6 +1,7 @@
 import { signInAction, signOutAction } from './actions';
 import { push } from 'connected-react-router';
 import { auth, db, FirebaseTimestamp } from '../../firebase/index';
+import { UsersInfo } from './types';
 
 export const listenAuthState = () => {
   return async (dispatch: any) => {
@@ -28,6 +29,24 @@ export const listenAuthState = () => {
         dispatch(push('/signin'));
       }
     });
+  };
+};
+
+export const resetPassword = (email: string) => {
+  return async (dispatch: any) => {
+    if (email === '') {
+      alert('You need to fill required form.');
+      return false;
+    }
+    auth
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        alert('Email to reset your Password has sent.');
+        dispatch(push('/signin'));
+      })
+      .catch(() => {
+        alert('Failed to reset your Password. Please try again later.');
+      });
   };
 };
 

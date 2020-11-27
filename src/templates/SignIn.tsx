@@ -1,3 +1,4 @@
+import { push } from 'connected-react-router';
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { PrimaryButton, TextInput } from '../components/UIkit';
@@ -52,6 +53,8 @@ const SignIn = () => {
         label={'Sign in'}
         onClick={() => dispatch(signIn(email, password))}
       />
+      <p onClick={() => dispatch(push('/signup'))}>Sign Up</p>
+      <p onClick={() => dispatch(push('/signin/reset'))}>Forgot password?</p>
     </div>
   );
 };
