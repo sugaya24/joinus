@@ -6,6 +6,9 @@ const initialState = {
     username: '',
     email: '',
   },
+  posts: {
+    list: [],
+  },
 };
 
 export default initialState;

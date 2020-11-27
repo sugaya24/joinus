@@ -1,7 +1,6 @@
 import { signInAction, signOutAction } from './actions';
 import { push } from 'connected-react-router';
 import { auth, db, FirebaseTimestamp } from '../../firebase/index';
-import { UsersInfo } from './types';
 
 export const listenAuthState = () => {
   return async (dispatch: any) => {
