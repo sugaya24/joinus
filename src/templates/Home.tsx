@@ -1,22 +1,24 @@
 import React from 'react';
-import { getUserId, getUserName, getEmail } from '../reducks/users/selector';
-import { useDispatch, useSelector } from 'react-redux';
-import { signOut } from '../reducks/users/operations';
+import { useDispatch } from 'react-redux';
+import { PrimaryButton } from '../components/UIkit';
+import { push } from 'connected-react-router';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
-  const uid = getUserId(selector);
-  const username = getUserName(selector);
-  const email = getEmail(selector);
 
   return (
     <div>
-      Home
-      <p>uid: {uid}</p>
-      <p>username: {username}</p>
-      <p>email: {email}</p>
-      <button onClick={() => dispatch(signOut())}>SIGN OUT</button>
+      <h2>JOINUS</h2>
+      <div>
+        <PrimaryButton
+          label={'SIGN IN'}
+          onClick={() => dispatch(push('/signin'))}
+        />
+        <PrimaryButton
+          label={'SIGN UP'}
+          onClick={() => dispatch(push('/signup'))}
+        />
+      </div>
     </div>
   );
 };
