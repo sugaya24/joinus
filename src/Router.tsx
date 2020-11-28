@@ -1,7 +1,15 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
 import Auth from './Auth';
-import { Home, SignUp, SignIn, Reset, CreatePost, Discover } from './templates';
+import {
+  Home,
+  SignUp,
+  SignIn,
+  Reset,
+  CreatePost,
+  Discover,
+  PostDetail,
+} from './templates';
 
 export const Router = () => {
   return (
@@ -12,7 +20,8 @@ export const Router = () => {
       <Route exact path={'/signin/reset'} component={Reset} />
       <Auth>
         <Route exact path={'/discover'} component={Discover} />
-        <Route exact path={'/post'} component={CreatePost} />
+        <Route exact path={'/createpost'} component={CreatePost} />
+        <Route exact path={'/post/:id'} component={PostDetail} />
       </Auth>
     </Switch>
   );
