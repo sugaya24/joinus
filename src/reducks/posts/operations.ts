@@ -8,7 +8,8 @@ export const sendPost = (
   title: string,
   date: string,
   location: string,
-  description: string
+  description: string,
+  author: string
 ) => {
   return async (dispatch: any) => {
     const timestamp = FirebaseTimestamp.now();
@@ -20,6 +21,7 @@ export const sendPost = (
       location: location,
       description: description,
       created_at: timestamp,
+      author: author,
     };
 
     const ref = postsRef.doc();

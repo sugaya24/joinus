@@ -6,6 +6,7 @@ const PostCard = (props: any) => {
     <Card>
       <CardContent>
         <Typography component="h3">{props.title}</Typography>
+        <Typography component="span">{props.author}</Typography>
         <Typography component="p">When: {props.date}</Typography>
         <Typography component="p">Where: {props.location}</Typography>
         <Typography component="p">Description: {props.description}</Typography>

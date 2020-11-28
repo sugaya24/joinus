@@ -4,4 +4,5 @@ export type Post = {
   date: string;
   location: string;
   description: string;
+  author: string;
 };

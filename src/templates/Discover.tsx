@@ -26,6 +26,7 @@ const Discover = () => {
             date={post.date}
             location={post.location}
             description={post.description}
+            author={post.author}
           />
         ))}
     </section>
