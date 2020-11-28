@@ -1,11 +1,24 @@
+import { makeStyles } from '@material-ui/core';
 import React from 'react';
+import { BottomMenu } from './components/BottomMenu';
 import Router from './Router';
 
+const useStyles = makeStyles({
+  root: {
+    paddingBottom: '100px',
+  },
+});
+
 const App = () => {
+  const classes = useStyles();
+
   return (
-    <main>
-      <Router />
-    </main>
+    <div className={classes.root}>
+      <BottomMenu />
+      <main>
+        <Router />
+      </main>
+    </div>
   );
 };
 
