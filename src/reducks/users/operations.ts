@@ -22,10 +22,9 @@ export const listenAuthState = () => {
                 username: data?.username,
               })
             );
-            dispatch(push('/'));
           });
       } else {
-        dispatch(push('/signin'));
+        dispatch(push('/'));
       }
     });
   };
@@ -75,7 +74,7 @@ export const signIn = (email: string, password: string) => {
                 username: data?.username,
               })
             );
-            dispatch(push('/'));
+            dispatch(push('/discover'));
           });
       }
     });
@@ -127,7 +126,7 @@ export const signUp = (
             .doc(uid)
             .set(userInitialData)
             .then(() => {
-              dispatch(push('/'));
+              dispatch(push('/discover'));
             });
         }
       });
@@ -138,7 +137,7 @@ export const signOut = () => {
   return async (dispatch: any) => {
     auth.signOut().then(() => {
       dispatch(signOutAction());
-      dispatch(push('/signin'));
+      dispatch(push('/'));
     });
   };
 };

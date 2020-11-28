@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { PrimaryButton, TextInput } from '../components/UIkit';
 import { sendPost } from '../reducks/posts/operations';
-import { Post } from '../reducks/posts/types';
 
 const CreatePost = () => {
   const dispatch = useDispatch();
