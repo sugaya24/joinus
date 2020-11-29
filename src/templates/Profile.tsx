@@ -1,12 +1,16 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Icon, IconButton, makeStyles } from '@material-ui/core';
-import { Settings } from '@material-ui/icons';
+import { ExitToApp } from '@material-ui/icons';
 import { getImage, getUserId, getUserName } from '../reducks/users/selector';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts } from '../reducks/posts/operations';
 import { getPosts } from '../reducks/posts/selectors';
 import { storage } from '../firebase';
-import { fetchUserImage, updateImage } from '../reducks/users/operations';
+import {
+  fetchUserImage,
+  signOut,
+  updateImage,
+} from '../reducks/users/operations';
 
 const useStyles = makeStyles({
   coverTop: {
@@ -24,7 +28,9 @@ const useStyles = makeStyles({
     borderRadius: '50%',
     background: '#C4C4C4',
     bottom: '-20px',
-    left: '129px',
+    left: 0,
+    right: 0,
+    margin: '0 auto',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -126,7 +132,7 @@ const Profile = () => {
           <div className={classes.settingIconWrapper}>
             <IconButton>
               <Icon>
-                <Settings className={classes.dummy} />
+                <ExitToApp className={classes.dummy} />
               </Icon>
             </IconButton>
           </div>
@@ -134,9 +140,9 @@ const Profile = () => {
             <h2>Profile</h2>
           </div>
           <div className={classes.settingIconWrapper}>
-            <IconButton>
+            <IconButton onClick={() => dispatch(signOut())}>
               <Icon>
-                <Settings className={classes.settingIcon} />
+                <ExitToApp className={classes.settingIcon} />
               </Icon>
             </IconButton>
           </div>
