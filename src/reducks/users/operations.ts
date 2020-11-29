@@ -1,6 +1,7 @@
-import { signInAction, signOutAction } from './actions';
+import { signInAction, signOutAction, updateImageAction } from './actions';
 import { push } from 'connected-react-router';
 import { auth, db, FirebaseTimestamp } from '../../firebase/index';
+import defaultImagePath from '../../assets/user_default_icon.png';
 
 export const listenAuthState = () => {
   return async (dispatch: any) => {
@@ -20,6 +21,7 @@ export const listenAuthState = () => {
                 role: data?.role,
                 uid: uid,
                 username: data?.username,
+                image: data?.image,
               })
             );
           });
@@ -112,7 +114,6 @@ export const signUp = (
         if (user) {
           const uid = user.uid;
           const timestamp = FirebaseTimestamp.now();
-          console.log('timestamp', timestamp);
 
           const userInitialData = {
             created_at: timestamp,
@@ -120,6 +121,7 @@ export const signUp = (
             uid: uid,
             updated_at: timestamp,
             username: username,
+            image: { id: '', path: defaultImagePath },
           };
 
           db.collection('users')
@@ -140,4 +142,20 @@ export const signOut = () => {
       dispatch(push('/'));
     });
   };
+};
+
+export const updateImage = (uid: any, image: any) => {
+  return async (dispatch: any, getState: any) => {
+    db.collection('users')
+      .doc(uid)
+      .set({ image: { ...image } }, { merge: true })
+      .then(() => {
+        dispatch(updateImageAction(image));
+      })
+      .catch((err) => console.log('err', err));
+  };
+};
+
+export const fetchUserImage = (uid: any) => {
+  return async (dispatch: any) => {};
 };

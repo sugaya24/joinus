@@ -5,10 +5,12 @@ export type UsersInfo = {
   username: string;
   email?: string;
   confirmPassword?: string;
+  image?: object;
 };
 
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
+export const UPDATE_IMAGE = 'UPDATE_IMAGE';
 
 type SignInAction = {
   type: typeof SIGN_IN;
@@ -20,4 +22,9 @@ type SignOutAction = {
   payload: UsersInfo;
 };
 
-export type UsersActionTypes = SignInAction | SignOutAction;
+type UpdateImageAction = {
+  type: typeof UPDATE_IMAGE;
+  payload: UsersInfo;
+};
+
+export type UsersActionTypes = SignInAction | SignOutAction | UpdateImageAction;

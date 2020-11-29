@@ -5,6 +5,7 @@ const initialState = {
     uid: '',
     username: '',
     email: '',
+    image: { id: '', path: '' },
   },
   posts: {
     list: [],

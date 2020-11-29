@@ -10,6 +10,7 @@ export const signInAction = (userState: UsersInfo) => {
       uid: userState.uid,
       username: userState.username,
       email: userState.email,
+      image: userState.image,
     },
   };
 };
@@ -24,5 +25,13 @@ export const signOutAction = () => {
       uid: '',
       username: '',
     },
+  };
+};
+
+export const UPDATE_IMAGE = 'UPDATE_IMAGE';
+export const updateImageAction = (image: any) => {
+  return {
+    type: 'UPDATE_IMAGE',
+    payload: image,
   };
 };

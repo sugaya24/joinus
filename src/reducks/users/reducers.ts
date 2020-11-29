@@ -16,6 +16,11 @@ export const UsersReducer = (
       return {
         ...action.payload,
       };
+    case Actions.UPDATE_IMAGE:
+      return {
+        ...state,
+        image: { ...action.payload },
+      };
     default:
       return state;
   }

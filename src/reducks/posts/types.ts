@@ -5,4 +5,5 @@ export type Post = {
   location: string;
   description: string;
   author: string;
+  image: { uid: string; path: string };
 };
