@@ -2,12 +2,13 @@ import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryButton, TextInput } from '../components/UIkit';
 import { sendPost } from '../reducks/posts/operations';
-import { getUserName } from '../reducks/users/selector';
+import { getUserId, getUserName } from '../reducks/users/selector';
 
 const CreatePost = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const author = getUserName(selector);
+  const uid = getUserId(selector);
 
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
@@ -85,7 +86,7 @@ const CreatePost = () => {
       <PrimaryButton
         label={'Send'}
         onClick={() =>
-          dispatch(sendPost(title, date, location, description, author))
+          dispatch(sendPost(title, date, location, description, author, uid))
         }
       />
     </div>

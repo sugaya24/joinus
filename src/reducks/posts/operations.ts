@@ -9,7 +9,8 @@ export const sendPost = (
   date: string,
   location: string,
   description: string,
-  author: string
+  author: string,
+  uid: string
 ) => {
   return async (dispatch: any) => {
     const timestamp = FirebaseTimestamp.now();
@@ -22,6 +23,7 @@ export const sendPost = (
       description: description,
       created_at: timestamp,
       author: author,
+      uid: uid,
     };
 
     const ref = postsRef.doc();
@@ -40,20 +42,17 @@ export const sendPost = (
   };
 };
 
-export const fetchPosts = () => {
-  console.log('fetchPosts');
+export const fetchPosts = (uid = '') => {
   return async (dispatch: any) => {
-    postsRef
-      .orderBy('created_at', 'desc')
-      .get()
-      .then((snapshots) => {
-        const postList: any[] = [];
-        snapshots.forEach((snapshot) => {
-          console.log('snapshot.data()', snapshot.data());
-          const post = snapshot.data();
-          postList.push(post);
-        });
-        dispatch(fetchPostsAction(postList));
+    let query = postsRef.orderBy('created_at', 'desc');
+    query = uid !== '' ? query.where('uid', '==', uid) : query;
+    query.get().then((snapshots) => {
+      const postList: any[] = [];
+      snapshots.forEach((snapshot) => {
+        const post = snapshot.data();
+        postList.push(post);
       });
+      dispatch(fetchPostsAction(postList));
+    });
   };
 };

@@ -9,6 +9,7 @@ import {
   CreatePost,
   Discover,
   PostDetail,
+  Profile,
 } from './templates';
 
 export const Router = () => {
@@ -22,6 +23,7 @@ export const Router = () => {
         <Route exact path={'/discover'} component={Discover} />
         <Route exact path={'/createpost'} component={CreatePost} />
         <Route exact path={'/post/:id'} component={PostDetail} />
+        <Route exact path={'/profile(/:id)?'} component={Profile} />
       </Auth>
     </Switch>
   );

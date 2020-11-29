@@ -32,7 +32,7 @@ const BottomMenu = () => {
   return (
     <section className={classes.root}>
       <div className={classes.menu}>
-        <IconButton onClick={() => dispatch(push('/'))}>
+        <IconButton onClick={() => dispatch(push('/profile'))}>
           <Home />
         </IconButton>
         <IconButton onClick={() => dispatch(push('/discover'))}>
