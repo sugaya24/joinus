@@ -13,6 +13,11 @@ export const PostsReducer = (state = initialState.posts, action: any) => {
         ...state,
         list: [...action.payload],
       };
+    case Actions.FETCH_FAVORITE_USERS:
+      return {
+        ...state,
+        favoriteUsers: [...action.payload],
+      };
     default:
       return state;
   }

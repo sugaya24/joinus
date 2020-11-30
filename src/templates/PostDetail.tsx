@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { db } from '../firebase';
 import {
   Card,
@@ -9,11 +9,15 @@ import {
   Typography,
 } from '@material-ui/core';
 import { FavoriteBorder, Favorite } from '@material-ui/icons';
+import { fetchFavoriteUsers } from '../reducks/posts/operations';
+import { getFavoriteUsers } from '../reducks/posts/selectors';
 
 const PostDetail = () => {
+  const dispatch = useDispatch();
   const selector = useSelector((state: any) => state);
   const path = selector.router.location.pathname;
   const id = path.split('/post/')[1];
+  const favoriteUsers = getFavoriteUsers(selector);
 
   const [post, setPost] = useState<any>(null);
 
@@ -26,6 +30,11 @@ const PostDetail = () => {
         setPost(data);
       });
   }, []);
+
+  useEffect(() => {
+    if (!post) return;
+    dispatch(fetchFavoriteUsers(post.id));
+  }, [post]);
 
   return (
     <section>
@@ -48,6 +57,12 @@ const PostDetail = () => {
           </Card>
 
           <h2>Users who liked this post</h2>
+          <ul>
+            {favoriteUsers.length > 0 &&
+              favoriteUsers.map((user: any) => (
+                <li key={user.uid}>{user.username}</li>
+              ))}
+          </ul>
         </section>
       )}
     </section>

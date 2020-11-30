@@ -1,6 +1,6 @@
 import { push } from 'connected-react-router';
 import { db, FirebaseTimestamp } from '../../firebase';
-import { fetchPostsAction } from './actions';
+import { fetchFavoriteUsersAction, fetchPostsAction } from './actions';
 
 const postsRef = db.collection('posts');
 
@@ -54,6 +54,27 @@ export const fetchPosts = (uid = '') => {
       });
       dispatch(fetchPostsAction(postList));
     });
+  };
+};
+
+export const fetchFavoriteUsers = (postId: any) => {
+  return async (dispatch: any) => {
+    postsRef
+      .doc(postId)
+      .collection('favoriteUsers')
+      .get()
+      .then((snapshots) => {
+        const favoriteUsersList: any[] = [];
+        snapshots.forEach((snapshot) => {
+          const uid = snapshot.data().uid;
+          const userRef = db.collection('users').doc(uid);
+          userRef.get().then((snapshot) => {
+            const user = snapshot.data();
+            favoriteUsersList.push(user);
+            dispatch(fetchFavoriteUsersAction(favoriteUsersList));
+          });
+        });
+      });
   };
 };
 

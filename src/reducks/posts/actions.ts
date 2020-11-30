@@ -15,3 +15,11 @@ export const fetchPostsAction = (posts: any) => {
     payload: posts,
   };
 };
+
+export const FETCH_FAVORITE_USERS = 'FETCH_FAVORITE_USERS';
+export const fetchFavoriteUsersAction = (favoriteUsersList: any) => {
+  return {
+    type: 'FETCH_FAVORITE_USERS',
+    payload: favoriteUsersList,
+  };
+};
