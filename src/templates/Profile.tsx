@@ -80,7 +80,6 @@ const Profile = () => {
   const uid = getUserId(selector);
   const posts = getPosts(selector);
   const userImage = getImage(selector);
-  console.log('userImage', userImage);
 
   const inputFile = useRef<HTMLInputElement>(null);
 
