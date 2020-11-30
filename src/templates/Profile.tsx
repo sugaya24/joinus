@@ -6,11 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts } from '../reducks/posts/operations';
 import { getPosts } from '../reducks/posts/selectors';
 import { storage } from '../firebase';
-import {
-  fetchUserImage,
-  signOut,
-  updateImage,
-} from '../reducks/users/operations';
+import { signOut, updateImage } from '../reducks/users/operations';
 
 const useStyles = makeStyles({
   coverTop: {
@@ -121,7 +117,6 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(fetchPosts(uid));
-    dispatch(fetchUserImage(uid));
   }, []);
 
   return (
