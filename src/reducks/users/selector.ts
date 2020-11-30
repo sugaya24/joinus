@@ -17,3 +17,8 @@ export const getUserName = createSelector(
 export const getEmail = createSelector([usersSelector], (state) => state.email);
 
 export const getImage = createSelector([usersSelector], (state) => state.image);
+
+export const getFavoritePosts = createSelector(
+  [usersSelector],
+  (state) => state.favoritePosts
+);

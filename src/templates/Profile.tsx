@@ -1,12 +1,21 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Icon, IconButton, makeStyles } from '@material-ui/core';
 import { ExitToApp } from '@material-ui/icons';
-import { getImage, getUserId, getUserName } from '../reducks/users/selector';
+import {
+  getFavoritePosts,
+  getImage,
+  getUserId,
+  getUserName,
+} from '../reducks/users/selector';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts } from '../reducks/posts/operations';
 import { getPosts } from '../reducks/posts/selectors';
 import { storage } from '../firebase';
-import { signOut, updateImage } from '../reducks/users/operations';
+import {
+  fetchFavoritePosts,
+  signOut,
+  updateImage,
+} from '../reducks/users/operations';
 
 const useStyles = makeStyles({
   coverTop: {
@@ -76,6 +85,8 @@ const Profile = () => {
   const uid = getUserId(selector);
   const posts = getPosts(selector);
   const userImage = getImage(selector);
+  const favoritePosts = getFavoritePosts(selector);
+  console.log('favoritePosts', favoritePosts);
 
   const inputFile = useRef<HTMLInputElement>(null);
 
@@ -117,6 +128,7 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(fetchPosts(uid));
+    dispatch(fetchFavoritePosts());
   }, []);
 
   return (
@@ -163,9 +175,10 @@ const Profile = () => {
         <div className={classes.posts}>
           <h3>Liked Posts</h3>
           <ul>
-            <li>hogehogehoge</li>
-            <li>hogehogehoge</li>
-            <li>hogehogehoge</li>
+            {favoritePosts.length > 0 &&
+              favoritePosts.map((post: any) => (
+                <li key={post.id}>{post.title}</li>
+              ))}
           </ul>
         </div>
       </div>

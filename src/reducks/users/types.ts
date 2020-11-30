@@ -1,3 +1,5 @@
+import { FETCH_FAVORITE_POSTS } from './actions';
+
 export type UsersInfo = {
   isSignedIn: boolean;
   role: string;
@@ -27,4 +29,13 @@ type UpdateImageAction = {
   payload: UsersInfo;
 };
 
-export type UsersActionTypes = SignInAction | SignOutAction | UpdateImageAction;
+type FetchFavoriteAction = {
+  type: typeof FETCH_FAVORITE_POSTS;
+  payload: UsersInfo;
+};
+
+export type UsersActionTypes =
+  | SignInAction
+  | SignOutAction
+  | UpdateImageAction
+  | FetchFavoriteAction;

@@ -1,4 +1,9 @@
-import { signInAction, signOutAction, updateImageAction } from './actions';
+import {
+  fetchFavoritePostsAction,
+  signInAction,
+  signOutAction,
+  updateImageAction,
+} from './actions';
 import { push } from 'connected-react-router';
 import { auth, db, FirebaseTimestamp } from '../../firebase/index';
 import defaultImagePath from '../../assets/user_default_icon.png';
@@ -153,5 +158,30 @@ export const updateImage = (uid: any, image: any) => {
         dispatch(updateImageAction(image));
       })
       .catch((err) => console.log('err', err));
+  };
+};
+
+export const fetchFavoritePosts = () => {
+  return async (dispatch: any, getState: any) => {
+    const uid = getState().users.uid;
+    const userRef = db.collection('users').doc(uid);
+    userRef
+      .collection('favoritePosts')
+      .orderBy('created_at', 'desc')
+      .get()
+      .then((snapshots) => {
+        const favoritePostList: any[] = [];
+        snapshots.forEach(async (snapshot) => {
+          const favoritePostId = snapshot.data().id;
+          await db
+            .collection('posts')
+            .doc(favoritePostId)
+            .get()
+            .then((post) => {
+              favoritePostList.push(post.data());
+            });
+          dispatch(fetchFavoritePostsAction(favoritePostList));
+        });
+      });
   };
 };

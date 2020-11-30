@@ -35,3 +35,11 @@ export const updateImageAction = (image: any) => {
     payload: image,
   };
 };
+
+export const FETCH_FAVORITE_POSTS = 'FETCH_FAVORITE_POSTS';
+export const fetchFavoritePostsAction = (posts: any) => {
+  return {
+    type: 'FETCH_FAVORITE_POSTS',
+    payload: posts,
+  };
+};

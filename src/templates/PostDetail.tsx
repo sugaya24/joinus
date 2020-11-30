@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { db } from '../firebase';
-import { Card, CardContent, Typography } from '@material-ui/core';
+import {
+  Card,
+  CardContent,
+  Icon,
+  IconButton,
+  Typography,
+} from '@material-ui/core';
+import { FavoriteBorder, Favorite } from '@material-ui/icons';
 
 const PostDetail = () => {
   const selector = useSelector((state: any) => state);
@@ -32,6 +39,11 @@ const PostDetail = () => {
               <Typography component="p">
                 DESCRIPTION: {post.description}
               </Typography>
+              <IconButton>
+                <Icon>
+                  <FavoriteBorder />
+                </Icon>
+              </IconButton>
             </CardContent>
           </Card>
 

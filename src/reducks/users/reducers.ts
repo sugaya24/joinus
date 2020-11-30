@@ -21,6 +21,11 @@ export const UsersReducer = (
         ...state,
         image: { ...action.payload },
       };
+    case Actions.FETCH_FAVORITE_POSTS:
+      return {
+        ...state,
+        favoritePosts: action.payload,
+      };
     default:
       return state;
   }
