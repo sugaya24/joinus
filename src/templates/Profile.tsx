@@ -86,7 +86,6 @@ const Profile = () => {
   const posts = getPosts(selector);
   const userImage = getImage(selector);
   const favoritePosts = getFavoritePosts(selector);
-  console.log('favoritePosts', favoritePosts);
 
   const inputFile = useRef<HTMLInputElement>(null);
 
