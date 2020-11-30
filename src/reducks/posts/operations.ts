@@ -56,3 +56,26 @@ export const fetchPosts = (uid = '') => {
     });
   };
 };
+
+export const addFavoritePost = (postId: any) => {
+  return async (dispatch: any, getState: any) => {
+    const uid = getState().users.uid;
+    const userRef = db.collection('users').doc(uid);
+    const postRef = db.collection('posts').doc(postId);
+    const timestamp = FirebaseTimestamp.now();
+
+    const batch = db.batch();
+
+    batch.set(userRef.collection('favoritePosts').doc(postId), {
+      id: postId,
+      postRef: postRef,
+      created_at: timestamp,
+    });
+    batch.set(postRef.collection('favoriteUsers').doc(uid), {
+      uid: uid,
+      created_at: timestamp,
+    });
+
+    await batch.commit();
+  };
+};

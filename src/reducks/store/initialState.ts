@@ -6,9 +6,11 @@ const initialState = {
     username: '',
     email: '',
     image: { id: '', path: '' },
+    favoritePosts: [],
   },
   posts: {
     list: [],
+    favoriteUsers: [],
   },
 };
 
