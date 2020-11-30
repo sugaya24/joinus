@@ -16,6 +16,7 @@ import {
   signOut,
   updateImage,
 } from '../reducks/users/operations';
+import { LikedPosts, RecentPosts } from '../components/Profile';
 
 const useStyles = makeStyles({
   coverTop: {
@@ -52,9 +53,6 @@ const useStyles = makeStyles({
   },
   username: {
     textAlign: 'center',
-    marginBottom: '20px',
-  },
-  posts: {
     marginBottom: '20px',
   },
   profileHeader: {
@@ -164,22 +162,8 @@ const Profile = () => {
       </div>
       <div className={classes.detail}>
         <h2 className={classes.username}>{username}</h2>
-        <div className={classes.posts}>
-          <h3>Recent Posts</h3>
-          <ul>
-            {posts.length > 0 &&
-              posts.map((post: any) => <li key={post.id}>{post.title}</li>)}
-          </ul>
-        </div>
-        <div className={classes.posts}>
-          <h3>Liked Posts</h3>
-          <ul>
-            {favoritePosts.length > 0 &&
-              favoritePosts.map((post: any) => (
-                <li key={post.id}>{post.title}</li>
-              ))}
-          </ul>
-        </div>
+        <RecentPosts favoritePosts={favoritePosts} />
+        <LikedPosts posts={posts} />
       </div>
     </section>
   );
