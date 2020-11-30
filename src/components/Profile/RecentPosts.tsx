@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -16,7 +17,11 @@ const RecentPosts = (props: any) => {
       <h3>Liked Posts</h3>
       <ul>
         {favoritePosts.length > 0 &&
-          favoritePosts.map((post: any) => <li key={post.id}>{post.title}</li>)}
+          favoritePosts.map((post: any) => (
+            <li key={post.id}>
+              <Link to={`/post/${post.id}`}>{post.title}</Link>
+            </li>
+          ))}
       </ul>
     </div>
   );
