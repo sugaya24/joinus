@@ -145,7 +145,7 @@ export const signOut = () => {
 };
 
 export const updateImage = (uid: any, image: any) => {
-  return async (dispatch: any, getState: any) => {
+  return async (dispatch: any) => {
     db.collection('users')
       .doc(uid)
       .set({ image: { ...image } }, { merge: true })
@@ -154,8 +154,4 @@ export const updateImage = (uid: any, image: any) => {
       })
       .catch((err) => console.log('err', err));
   };
-};
-
-export const fetchUserImage = (uid: any) => {
-  return async (dispatch: any) => {};
 };
