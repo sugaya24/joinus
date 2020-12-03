@@ -79,6 +79,7 @@ export const signIn = (email: string, password: string) => {
                 role: data?.role,
                 uid: uid,
                 username: data?.username,
+                image: data?.image,
               })
             );
             dispatch(push('/discover'));

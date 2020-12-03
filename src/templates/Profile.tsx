@@ -8,7 +8,6 @@ import {
   getUserName,
 } from '../reducks/users/selector';
 import { useDispatch, useSelector } from 'react-redux';
-// import { fetchPosts } from '../reducks/posts/operations';
 import { getPosts } from '../reducks/posts/selectors';
 import { storage } from '../firebase';
 import {
@@ -97,7 +96,6 @@ const Profile = () => {
   const uploadImage = useCallback(
     (e) => {
       const file = e.target.files;
-      console.log('file', file);
       let blob = new Blob(file, { type: 'image/png' });
 
       const S =
