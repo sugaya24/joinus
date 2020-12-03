@@ -8,7 +8,12 @@ export const PostsReducer = (state = initialState.posts, action: any) => {
         ...state,
         ...action.payload,
       };
-    case Actions.FETCH_POSTS:
+    case Actions.FETCH_ALL_POSTS:
+      return {
+        ...state,
+        list: [...action.payload],
+      };
+    case Actions.FETCH_USERS_POSTS:
       return {
         ...state,
         list: [...action.payload],
@@ -17,6 +22,11 @@ export const PostsReducer = (state = initialState.posts, action: any) => {
       return {
         ...state,
         favoriteUsers: [...action.payload],
+      };
+    case Actions.ADD_POST:
+      return {
+        ...state,
+        list: [...state.list, action.payload],
       };
     default:
       return state;

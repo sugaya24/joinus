@@ -1,6 +1,11 @@
 import { push } from 'connected-react-router';
 import { db, FirebaseTimestamp } from '../../firebase';
-import { fetchFavoriteUsersAction, fetchPostsAction } from './actions';
+import {
+  addPostAction,
+  fetchFavoriteUsersAction,
+  fetchAllPostsAction,
+  fetchUsersPostsAction,
+} from './actions';
 
 const postsRef = db.collection('posts');
 
@@ -42,19 +47,52 @@ export const sendPost = (
   };
 };
 
-export const fetchPosts = (uid = '') => {
+export const fetchAllPosts = (uid: string) => {
   return async (dispatch: any) => {
-    let query = postsRef.orderBy('created_at', 'desc');
-    query = uid !== '' ? query.where('uid', '==', uid) : query;
-    query.get().then((snapshots) => {
-      const postList: any[] = [];
-      snapshots.forEach((snapshot) => {
-        const post = snapshot.data();
-        postList.push(post);
+    const postList: any[] = [];
+    dispatch(fetchAllPostsAction([]));
+    postsRef
+      .orderBy('created_at', 'desc')
+      .get()
+      .then((snapshots) => {
+        snapshots.forEach((snapshot) => {
+          const post = snapshot.data();
+          hasFavoriteByUser(post.id, uid).then((hasFavorite) => {
+            postList.push({ ...post, hasFavorite });
+            dispatch(addPostAction({ ...post, hasFavorite }));
+          });
+        });
       });
-      dispatch(fetchPostsAction(postList));
-    });
   };
+};
+
+export const fetchUsersPosts = (uid: string) => {
+  return async (dispatch: any) => {
+    const postList: any[] = [];
+    postsRef
+      .orderBy('created_at', 'desc')
+      .where('uid', '==', uid)
+      .get()
+      .then((snapshots) => {
+        snapshots.forEach((snapshot) => {
+          const post = snapshot.data();
+          postList.push(post);
+        });
+        dispatch(fetchUsersPostsAction(postList));
+      });
+  };
+};
+
+export const hasFavoriteByUser = (postId: string, uid: string) => {
+  // TODO: need to get one data?
+  return postsRef
+    .doc(postId)
+    .collection('favoriteUsers')
+    .where('uid', '==', uid)
+    .get()
+    .then((post: any) => {
+      return !!post.size;
+    });
 };
 
 export const fetchFavoriteUsers = (postId: any) => {

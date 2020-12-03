@@ -1,17 +1,19 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PostCard from '../components/PostCard';
-import { fetchPosts } from '../reducks/posts/operations';
+import { fetchAllPosts } from '../reducks/posts/operations';
 import { getPosts } from '../reducks/posts/selectors';
 import { Post } from '../reducks/posts/types';
+import { getUserId } from '../reducks/users/selector';
 
 const Discover = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
+  const uid = getUserId(selector);
   const posts = getPosts(selector);
 
   useEffect(() => {
-    dispatch(fetchPosts());
+    dispatch(fetchAllPosts(uid));
   }, []);
 
   return (

@@ -8,11 +8,27 @@ export const sendPostAction = (post: Post) => {
   };
 };
 
-export const FETCH_POSTS = 'FETCH_POSTS';
-export const fetchPostsAction = (posts: any) => {
+export const FETCH_ALL_POSTS = 'FETCH_ALL_POSTS';
+export const fetchAllPostsAction = (posts: any) => {
   return {
-    type: 'FETCH_POSTS',
+    type: 'FETCH_ALL_POSTS',
     payload: posts,
+  };
+};
+
+export const FETCH_USERS_POSTS = 'FETCH_USERS_POSTS';
+export const fetchUsersPostsAction = (posts: any) => {
+  return {
+    type: 'FETCH_USERS_POSTS',
+    payload: posts,
+  };
+};
+
+export const ADD_POST = 'ADD_POST';
+export const addPostAction = (post: any) => {
+  return {
+    type: 'ADD_POST',
+    payload: post,
   };
 };
 

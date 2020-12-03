@@ -8,7 +8,7 @@ import {
   getUserName,
 } from '../reducks/users/selector';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPosts } from '../reducks/posts/operations';
+// import { fetchPosts } from '../reducks/posts/operations';
 import { getPosts } from '../reducks/posts/selectors';
 import { storage } from '../firebase';
 import {
@@ -17,6 +17,7 @@ import {
   updateImage,
 } from '../reducks/users/operations';
 import { LikedPosts, RecentPosts } from '../components/Profile';
+import { fetchUsersPosts } from '../reducks/posts/operations';
 
 const useStyles = makeStyles({
   coverTop: {
@@ -124,8 +125,8 @@ const Profile = () => {
   );
 
   useEffect(() => {
-    dispatch(fetchPosts(uid));
     dispatch(fetchFavoritePosts());
+    dispatch(fetchUsersPosts(uid));
   }, []);
 
   return (

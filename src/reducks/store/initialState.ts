@@ -10,6 +10,7 @@ const initialState = {
   },
   posts: {
     list: [],
+    usersPosts: [],
     favoriteUsers: [],
   },
 };
