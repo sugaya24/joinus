@@ -6,4 +6,5 @@ export type Post = {
   description: string;
   author: string;
   image: { uid: string; path: string };
+  hasFavorite: boolean;
 };

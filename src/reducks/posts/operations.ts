@@ -138,3 +138,18 @@ export const addFavoritePost = (postId: any) => {
     await batch.commit();
   };
 };
+
+export const deleteFavoritePost = (postId: string) => {
+  return async (dispatch: any, getState: any) => {
+    const uid = getState().users.uid;
+    const userRef = db.collection('users').doc(uid);
+    const postRef = db.collection('posts').doc(postId);
+
+    const batch = db.batch();
+
+    batch.delete(userRef.collection('favoritePosts').doc(postId));
+    batch.delete(postRef.collection('favoriteUsers').doc(uid));
+
+    await batch.commit();
+  };
+};

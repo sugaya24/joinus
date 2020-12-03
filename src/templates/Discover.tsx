@@ -29,6 +29,7 @@ const Discover = () => {
             location={post.location}
             description={post.description}
             author={post.author}
+            hasFavorite={post.hasFavorite}
           />
         ))}
     </section>
